@@ -3,18 +3,17 @@ layout: layout.liquid
 title: Aviation Connect Feed
 ---
 
-
+<div class="main-title">
     <h4>Search for an airport to get information!</h4>
     <div x-data="{ open: false }">
         <input id="airport" type="text" placeholder="Enter airport to search">
         <button @click="open = true" id="search">Search</button>
 
         <div x-show="open" x-transition.duration.500ms>
-            <ul id="search-result>
-            </ul>
             Loading search data...
         </div>
     </div>
+</div>
 
 
       <div class="main-title">
