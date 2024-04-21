@@ -59,4 +59,5 @@ body {
 
 .card:hover {
     width: 125%;
+    height: auto;
 }
