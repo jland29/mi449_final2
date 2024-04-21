@@ -30,5 +30,3 @@ async function onLogIn() {
 button.addEventListener('click', function() {
     onLogIn();
 });
-
-export default supabase
