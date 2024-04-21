@@ -1,5 +1,5 @@
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js"
-//import { createClient } from '@supabase/supabase-js'
+//import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js"
+import { createClient } from '@supabase/supabase-js'
 //const { createClient } = require('@supabase/supabase-js');
 //import { createClient } from './supabase-js.js';
 
