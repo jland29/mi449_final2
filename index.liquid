@@ -64,4 +64,38 @@ title: Aviation Connect Feed
           </div>
       </div>
 
-      <script src="search.js"></script>
+      <script>
+        $(document).ready(function() {
+            $('#search').click(function() {
+                var name = $('#airport').val().trim();
+                
+                if (name !== '') {
+                $.ajax({
+                    method: 'GET',
+                    url: 'https://api.api-ninjas.com/v1/airports?name=' + name,
+                    headers: { 'X-Api-Key': 'YJVPbOHRXydJID3dD9aeWw==NB2ceiyHdLxxFLNT' },
+                    contentType: 'application/json',
+                    success: function(result) {
+                    console.log(result);
+                    displaySearchResults(result);
+                    },
+                    error: function ajaxError(jqXHR) {
+                    console.error('Error: ', jqXHR.responseText);
+                    $('#search-result').html('<li>Error fetching data</li>');
+                    }
+                });
+                }
+            });
+            });
+
+            function displaySearchResults(result) {
+            $('#search-result').empty();
+            if (result && result.length > 0) {
+                $.each(result, function(index, airport) {
+                $('#search-result').append('<li>' + airport.name + '</li>');
+                });
+            } else {
+                $('#search-result').append('<li>No airports found</li>');
+            }
+            }
+      </script>
