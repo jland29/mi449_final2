@@ -4,14 +4,15 @@ title: Aviation Connect Feed
 ---
 
 <div class="main-title">
-    <h4>Search for an airport to get information!</h4>
+    <h4>Current time:</h4>
     <div x-data="{ open: false }">
         <input id="airport" type="text" placeholder="Enter airport to search">
-        <button @click="open = true" id="search">Search</button>
+        <button @click="open = true" id="search">Get current time</button>
 
         <div x-show="open" x-transition.duration.500ms>
             Loading search data...
         </div>
+        <h5 id="current-time"></h5>
     </div>
 </div>
 
@@ -63,38 +64,21 @@ title: Aviation Connect Feed
           </div>
       </div>
 
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js">
-        $(document).ready(function() {
-            $('#search').click(function() {
-                var name = $('#airport').val().trim();
-                
-                if (name !== '') {
-                $.ajax({
-                    method: 'GET',
-                    url: 'https://api.api-ninjas.com/v1/airports?name=' + name,
-                    headers: { 'X-Api-Key': 'YJVPbOHRXydJID3dD9aeWw==NB2ceiyHdLxxFLNT' },
-                    contentType: 'application/json',
-                    success: function(result) {
-                    console.log(result);
-                    displaySearchResults(result);
-                    },
-                    error: function ajaxError(jqXHR) {
-                    console.error('Error: ', jqXHR.responseText);
-                    $('#search-result').html('<li>Error fetching data</li>');
-                    }
+    <script>
+        function getCurrentTime() {
+            fetch('http://worldtimeapi.org/api/ip')
+                .then(response => response.json())
+                .then(data => {
+                    const currentTime = new Date(data.utc_datetime);
+                    const formattedTime = currentTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+                    document.getElementById('current-time').textContent = `Current time: ${formattedTime}`;
+                    })
+                .catch(error => {
+                    console.error('Error fetching current time:', error);
+                    document.getElementById('current-time').textContent = 'Error fetching current time';
                 });
-                }
-            });
-            });
+        }
 
-            function displaySearchResults(result) {
-            $('#search-result').empty();
-            if (result && result.length > 0) {
-                $.each(result, function(index, airport) {
-                $('#search-result').append('<li>' + airport.name + '</li>');
-                });
-            } else {
-                $('#search-result').append('<li>No airports found</li>');
-            }
-            }
-      </script>
+        // Call getCurrentTime function when the page loads
+        window.onload = getCurrentTime;
+    </script>
