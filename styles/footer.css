@@ -1,0 +1,17 @@
+footer {
+    text-align: center;
+    background-color: #171717;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.foot-block {
+    justify-content: center;
+    color: #ffffff
+}
+
+.foot-block p {
+    margin: 0;
+}
