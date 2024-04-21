@@ -4,10 +4,9 @@ title: Aviation Connect Feed
 ---
 
 <div class="main-title">
-    <h4>Current time:</h4>
+    <h4>Current local time:</h4>
     <div x-data="{ open: false }">
-        <input id="airport" type="text" placeholder="Enter airport to search">
-        <button @click="open = true" id="search">Get current time</button>
+        <button @click="open = true" id="search" onclick="getCurrentTime()">Get current time</button>
 
         <div x-show="open" x-transition.duration.500ms>
             <h5 id="current-time"></h5>
